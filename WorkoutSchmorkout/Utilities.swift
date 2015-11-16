@@ -9,26 +9,6 @@
 import Foundation
 import CoreLocation
 
-class Console {
-    
-    //Please note that this is not my code but is roughly equivalent to the provided TextIO class.  It is taken from this stack overflow answer: http://stackoverflow.com/a/25042581
-    static func readln(max:Int = 8192) -> String? {
-        assert(max > 0, "max must be between 1 and Int.max")
-        
-        var buf:Array<CChar> = []
-        var c = getchar()
-        while c != EOF && c != 10 && buf.count < max {
-            buf.append(CChar(c))
-            c = getchar()
-        }
-        
-        //always null terminate
-        buf.append(CChar(0))
-        
-        return buf.withUnsafeBufferPointer { String.fromCString($0.baseAddress) }
-    }
-}
-
 class Utilities {
     static func retrieveUserLocation() -> CLLocationCoordinate2D {
         print("Please enter your current location.")
@@ -76,5 +56,18 @@ class Utilities {
             
             return rating
         }
+    }
+    
+    /**
+     Adds 5 starting workouts and returns the head of this list. This is for debugging purposes only
+     */
+    static func add5TestWorkouts() -> Workout {
+        let workout1 = Workout(startTime: NSDate(), duration: 5.0, location: CLLocationCoordinate2D(latitude: 25.0, longitude: 25.0), buddy: "Test Workout", rating: 5, id: 5, next: nil)
+        let workout2 = Workout(startTime: NSDate(), duration: 5.0, location: CLLocationCoordinate2D(latitude: 25.0, longitude: 25.0), buddy: "Test Workout", rating: 5, id: 4, next: workout1)
+        let workout3 = Workout(startTime: NSDate(), duration: 5.0, location: CLLocationCoordinate2D(latitude: 25.0, longitude: 25.0), buddy: "Test Workout", rating: 5, id: 3, next: workout2)
+        let workout4 = Workout(startTime: NSDate(), duration: 5.0, location: CLLocationCoordinate2D(latitude: 25.0, longitude: 25.0), buddy: "Test Workout", rating: 5, id: 2, next: workout3)
+        let head = Workout(startTime: NSDate(), duration: 5.0, location: CLLocationCoordinate2D(latitude: 25.0, longitude: 25.0), buddy: "HEAD", rating: 5, id: 1, next: workout4)
+        
+        return head
     }
 }

@@ -11,6 +11,7 @@
 		A51B2EAD1BF91DB8003AE087 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B2EAC1BF91DB8003AE087 /* Utilities.swift */; };
 		A51B2EAF1BF92202003AE087 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B2EAE1BF92202003AE087 /* Menu.swift */; };
 		A51B2EB11BF92C9D003AE087 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B2EB01BF92C9D003AE087 /* Workout.swift */; };
+		A5747F3A1BF962CA0029721C /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5747F391BF962CA0029721C /* Console.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 		A51B2EAC1BF91DB8003AE087 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A51B2EAE1BF92202003AE087 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		A51B2EB01BF92C9D003AE087 /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		A5747F391BF962CA0029721C /* Console.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				A51B2EB01BF92C9D003AE087 /* Workout.swift */,
 				A51B2EAE1BF92202003AE087 /* Menu.swift */,
 				A51B2EAC1BF91DB8003AE087 /* Utilities.swift */,
+				A5747F391BF962CA0029721C /* Console.swift */,
 			);
 			path = WorkoutSchmorkout;
 			sourceTree = "<group>";
@@ -129,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A51B2EAF1BF92202003AE087 /* Menu.swift in Sources */,
+				A5747F3A1BF962CA0029721C /* Console.swift in Sources */,
 				A51B2EAD1BF91DB8003AE087 /* Utilities.swift in Sources */,
 				A51B2EA61BF91CEE003AE087 /* main.swift in Sources */,
 				A51B2EB11BF92C9D003AE087 /* Workout.swift in Sources */,

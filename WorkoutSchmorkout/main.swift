@@ -11,7 +11,7 @@ import CoreLocation
 
 print("Welcome to the Workout Logger!  Select an option below:\n")
 
-var headOfList: Workout?
+var headOfList: Workout? = Utilities.add5TestWorkouts()
 
 while true {
     switch Menu.retrieveSelectedOption() {
@@ -33,15 +33,34 @@ while true {
         
         //add new workout to the end of the linked list
         if headOfList == nil {
-            let newWorkout = Workout(startTime: startTime, duration: elapsedTime, location: userLocation, buddy: buddy, rating: rating, next: nil)
+            let newWorkout = Workout(startTime: startTime, duration: elapsedTime, location: userLocation, buddy: buddy, rating: rating, id: 1, next: nil)
             headOfList = newWorkout
         } else {
-            headOfList!.append(startTime, duration: elapsedTime, location: userLocation, buddy: buddy, rating: rating)
+            headOfList!.append(startTime, duration: elapsedTime, location: userLocation, buddy: buddy, rating: rating, id: headOfList!.countWorkouts() + 1)
         }
         
         continue
         
-    case .Remove: print("remove")
+    case .Remove:
+        guard let head = headOfList else {
+            print("You have not recorded any workouts yet.\n")
+            continue
+        }
+        print(head.listDescription())
+        print("Type the number of the workout record listed above that you would like to remove:")
+        
+        guard let userInput = Console.readln() else {
+            print("COULD NOT INTERPRET INPUT. Please select an option from the menu below:")
+            continue
+        }
+        guard let selectedID = Int(userInput) where selectedID > 0 && selectedID <= head.countWorkouts() else {
+            print("That id is outside the range of your workout list.")
+            continue
+        }
+        
+        headOfList = head.removeWorkout(selectedID)
+        continue
+        
     case .DisplayAll:
         guard let headOfList = headOfList else {
             print("You have not recorded any workouts yet. \n")
