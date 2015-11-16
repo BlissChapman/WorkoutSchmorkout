@@ -73,7 +73,19 @@ while true {
     case .DisplayWithBuddy: print("display with buddy")
     case .DisplayWithLocation: print("display with location")
     case .PersonalBestForLocation: print("PersonalBestForLocation")
-    case .Quit: break
+    case .Quit:
+        
+        print("Are you sure you want to quit (yes or no)? - all your data will be lost.")
+        guard let userInput = Console.readln() else {
+            print("COULD NOT INTERPRET INPUT. Please select an option from the menu below:")
+            continue
+        }
+        
+        if userInput.uppercaseString == "YES" {
+            exit(EXIT_SUCCESS)
+        } else {
+            continue
+        }
     }
 }
 
