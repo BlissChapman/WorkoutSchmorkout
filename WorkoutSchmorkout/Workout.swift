@@ -15,12 +15,12 @@ class Workout {
     
     private(set) var startTime: NSDate
     private(set) var duration: NSTimeInterval
-    private(set) var location: CLLocationCoordinate2D
+    private(set) var location: String//CLLocationCoordinate2D
     private(set) var buddy: String?
     private(set) var rating: Int
     private(set) var id: Int
     
-    init(startTime: NSDate, duration: NSTimeInterval, location: CLLocationCoordinate2D, buddy: String?, rating: Int, id: Int, next: Workout?) {
+    init(startTime: NSDate, duration: NSTimeInterval, location: String, buddy: String?, rating: Int, id: Int, next: Workout?) {
         
         self.startTime = startTime
         self.duration = duration
@@ -33,13 +33,13 @@ class Workout {
     
     private func toString() -> String {
         let buddyText = (buddy?.characters.count > 0) ? buddy : "none"
-        return "\n Location: (latitude: \(location.latitude), longitude: \(location.longitude)) \n Buddy: \(buddyText ?? "none") \n Start Date: \(startTime) \n Duration: \(duration) \n Rating: \(rating)"
+        return "\n Location: \(location) \n Buddy: \(buddyText ?? "none") \n Start Date: \(startTime) \n Duration: \(duration) \n Rating: \(rating)"
     }
     
     /**
      Creates a new Workout entry at the end of the workouts list. Recursively finds the last entry then adds a new link to the end.
      */
-    func append(startTime: NSDate, duration: NSTimeInterval, location: CLLocationCoordinate2D, buddy: String?, rating: Int, id: Int) {
+    func append(startTime: NSDate, duration: NSTimeInterval, location: String, buddy: String?, rating: Int, id: Int) {
         if next == nil {
             next = Workout(startTime: startTime, duration: duration, location: location, buddy: buddy, rating: rating, id: id, next: nil)
         } else {
