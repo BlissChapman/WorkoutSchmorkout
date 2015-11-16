@@ -67,6 +67,9 @@ class Workout {
         return next!.listDescription()  + "\n\n" + currentWorkoutDescription
     }
     
+    /**
+     Returns a description of all workouts with the given buddy name.  The list will be displayed in order from the most recent workout to the oldest workout.
+     */
     func listDescriptionOfWorkoutsWithBuddy(name: String) -> String {
         let currentWorkoutDescription = "WORKOUT \(id): " + toString() + "\n"
 
@@ -79,6 +82,21 @@ class Workout {
         } else {
             return (next == nil) ? "" : next!.listDescriptionOfWorkoutsWithBuddy(name)
         }
+    }
+    
+    func listDescriptionOfWorkoutsWithLocation(location: String) -> String {
+        return "NOT YET IMPLEMENTED"
+//        let currentWorkoutDescription = "WORKOUT \(id): " + toString() + "\n"
+//        
+//        if self.location.uppercaseString == location.uppercaseString {
+//            if next == nil {
+//                return currentWorkoutDescription
+//            } else {
+//                return next!.listDescriptionOfWorkoutsWithBuddy(name)  + "\n\n" + currentWorkoutDescription
+//            }
+//        } else {
+//            return (next == nil) ? "" : next!.listDescriptionOfWorkoutsWithBuddy(name)
+//        }
     }
     
     /**

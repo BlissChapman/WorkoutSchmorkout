@@ -84,8 +84,24 @@ while true {
         print(headOfList.listDescriptionOfWorkoutsWithBuddy(buddyName))
         continue
         
-    case .DisplayWithLocation: print("display with location")
-    case .PersonalBestForLocation: print("PersonalBestForLocation")
+    case .DisplayWithLocation:
+        guard let headOfList = headOfList else {
+            print("You have not recorded any workouts yet. \n")
+            continue
+        }
+        
+        print("Enter the location you would like to search for:")
+        guard let locationSearch = Console.readln() else {
+            print("COULD NOT INTERPRET INPUT. Please select an option from the menu below:")
+            continue
+        }
+        
+        print(headOfList.listDescriptionOfWorkoutsWithBuddy(buddyName))
+        continue
+        
+    case .PersonalBestForLocation:
+        print("PERSONAL BEST - NOT YET IMPLEMENTED")
+        continue
     case .Quit:
         
         print("Are you sure you want to quit (yes or no)? - all your data will be lost.")
