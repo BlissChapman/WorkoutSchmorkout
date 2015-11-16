@@ -32,7 +32,8 @@ class Workout {
     }
     
     private func toString() -> String {
-        return "\n Location: (latitude: \(location.latitude), longitude: \(location.longitude)) \n Buddy: \(buddy ?? "no partner") \n Start Date: \(startTime) \n Duration: \(duration) \n Rating: \(rating)"
+        let buddyText = (buddy?.characters.count > 0) ? buddy : "none"
+        return "\n Location: (latitude: \(location.latitude), longitude: \(location.longitude)) \n Buddy: \(buddyText ?? "none") \n Start Date: \(startTime) \n Duration: \(duration) \n Rating: \(rating)"
     }
     
     /**
@@ -64,6 +65,20 @@ class Workout {
         }
         
         return next!.listDescription()  + "\n\n" + currentWorkoutDescription
+    }
+    
+    func listDescriptionOfWorkoutsWithBuddy(name: String) -> String {
+        let currentWorkoutDescription = "WORKOUT \(id): " + toString() + "\n"
+
+        if self.buddy?.uppercaseString == name.uppercaseString {
+            if next == nil {
+                return currentWorkoutDescription
+            } else {
+                return next!.listDescriptionOfWorkoutsWithBuddy(name)  + "\n\n" + currentWorkoutDescription
+            }
+        } else {
+            return (next == nil) ? "" : next!.listDescriptionOfWorkoutsWithBuddy(name)
+        }
     }
     
     /**

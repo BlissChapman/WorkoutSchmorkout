@@ -70,7 +70,20 @@ while true {
         print(headOfList.listDescription())
         continue
         
-    case .DisplayWithBuddy: print("display with buddy")
+    case .DisplayWithBuddy:
+        guard let headOfList = headOfList else {
+            print("You have not recorded any workouts yet. \n")
+            continue
+        }
+        
+        print("Enter your buddy's name:")
+        guard let buddyName = Console.readln() else {
+            print("COULD NOT INTERPRET INPUT. Please select an option from the menu below:")
+            continue
+        }
+        print(headOfList.listDescriptionOfWorkoutsWithBuddy(buddyName))
+        continue
+        
     case .DisplayWithLocation: print("display with location")
     case .PersonalBestForLocation: print("PersonalBestForLocation")
     case .Quit:
