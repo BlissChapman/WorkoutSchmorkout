@@ -19,6 +19,7 @@ class Workout {
     private(set) var buddy: String?
     private(set) var rating: Int
     private(set) var id: Int
+    private(set) var description: String
     
     init(startTime: NSDate, duration: NSTimeInterval, location: String, buddy: String?, rating: Int, id: Int, next: Workout?) {
         
@@ -29,12 +30,15 @@ class Workout {
         self.rating = rating
         self.next = next
         self.id = id
+        
+        self.description  = { () -> String in
+            let buddyText = (buddy?.characters.count > 0) ? buddy : "none"
+            let workoutContentDescription =  "\n Location: \(location) \n Buddy: \(buddyText ?? "none") \n Start Date: \(startTime) \n Duration: \(duration) \n Rating: \(rating)"
+            
+            return "WORKOUT \(id): " + workoutContentDescription + "\n"
+        }()
     }
     
-    private func toString() -> String {
-        let buddyText = (buddy?.characters.count > 0) ? buddy : "none"
-        return "\n Location: \(location) \n Buddy: \(buddyText ?? "none") \n Start Date: \(startTime) \n Duration: \(duration) \n Rating: \(rating)"
-    }
     
     /**
      Creates a new Workout entry at the end of the workouts list. Recursively finds the last entry then adds a new link to the end.
@@ -59,44 +63,51 @@ class Workout {
      The list will be displayed in order from the most recent workout to the oldest workout.
      */
     func listDescription() -> String {
-        let currentWorkoutDescription = "WORKOUT \(id): " + toString() + "\n"
         if next == nil {
-            return "\n" + currentWorkoutDescription
+            return "\n" + self.description
         }
         
-        return next!.listDescription()  + "\n\n" + currentWorkoutDescription
+        return next!.listDescription()  + "\n\n" + self.description
     }
     
     /**
      Returns a description of all workouts with the given buddy name.  The list will be displayed in order from the most recent workout to the oldest workout.
      */
-    func listDescriptionOfWorkoutsWithBuddy(name: String) -> String {
-        let currentWorkoutDescription = "WORKOUT \(id): " + toString() + "\n"
-
+    func listDescriptionOfWorkouts(withBuddy name: String) -> String {
         if self.buddy?.uppercaseString == name.uppercaseString {
             if next == nil {
-                return currentWorkoutDescription
+                return self.description
             } else {
-                return next!.listDescriptionOfWorkoutsWithBuddy(name)  + "\n\n" + currentWorkoutDescription
+                return next!.listDescriptionOfWorkouts(withBuddy: name)  + "\n\n" + self.description
             }
         } else {
-            return (next == nil) ? "" : next!.listDescriptionOfWorkoutsWithBuddy(name)
+            return (next == nil) ? "" : next!.listDescriptionOfWorkouts(withBuddy: name)
         }
     }
     
-    func listDescriptionOfWorkoutsWithLocation(location: String) -> String {
-        return "NOT YET IMPLEMENTED"
-//        let currentWorkoutDescription = "WORKOUT \(id): " + toString() + "\n"
-//        
-//        if self.location.uppercaseString == location.uppercaseString {
-//            if next == nil {
-//                return currentWorkoutDescription
-//            } else {
-//                return next!.listDescriptionOfWorkoutsWithBuddy(name)  + "\n\n" + currentWorkoutDescription
-//            }
-//        } else {
-//            return (next == nil) ? "" : next!.listDescriptionOfWorkoutsWithBuddy(name)
-//        }
+    /**
+     Returns a description of all workouts for the provided location sorted from highest to lowest rating.
+     */
+    func listDescriptionOfWorkouts(withLocation location: String) -> String {
+        if self.location.uppercaseString == location.uppercaseString {
+            if next != nil {
+                return findHeighestRatedWorkout().description + next!.listDescriptionOfWorkouts(withLocation: location)
+            } else {
+                return findHeighestRatedWorkout().description
+            }
+        } else {
+            return (next == nil) ? "" : next!.listDescriptionOfWorkouts(withLocation: location)
+        }
+    }
+    
+    private func findHeighestRatedWorkout() -> Workout {
+        guard next != nil else { return self }
+        
+        if self.rating >= next!.findHeighestRatedWorkout().rating {
+            return self
+        } else {
+            return next!.findHeighestRatedWorkout()
+        }
     }
     
     /**
@@ -109,7 +120,7 @@ class Workout {
     /**
      Removes the workout with the specified id if it exists and returns the head of the list.
      */
-    func removeWorkout(id: Int) -> Workout? {
+    func removeWorkout(withID id: Int) -> Workout? {
         let head = self
         
         //if the current item has the specified id (will only happen if the head is the workout to remove)
@@ -131,7 +142,7 @@ class Workout {
                 return headOfList
             } else {
                 //RECURSIVE CASE
-                return next!.removeWorkout(id)
+                return next!.removeWorkout(withID: id)
             }
         }
     }

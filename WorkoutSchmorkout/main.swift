@@ -58,7 +58,7 @@ while true {
             continue
         }
         
-        headOfList = head.removeWorkout(selectedID)
+        headOfList = head.removeWorkout(withID: selectedID)
         continue
         
     case .DisplayAll:
@@ -81,7 +81,8 @@ while true {
             print("COULD NOT INTERPRET INPUT. Please select an option from the menu below:")
             continue
         }
-        print(headOfList.listDescriptionOfWorkoutsWithBuddy(buddyName))
+        
+        print(headOfList.listDescriptionOfWorkouts(withBuddy: buddyName))
         continue
         
     case .DisplayWithLocation:
@@ -96,7 +97,8 @@ while true {
             continue
         }
         
-        print(headOfList.listDescriptionOfWorkoutsWithBuddy(buddyName))
+        print(headOfList.listDescriptionOfWorkouts(withLocation: locationSearch))
+        
         continue
         
     case .PersonalBestForLocation:
