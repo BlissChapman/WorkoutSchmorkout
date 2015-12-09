@@ -111,6 +111,27 @@ class Workout {
     }
     
     /**
+     Display the personal best time for a prompted location.
+    */
+    func displayPersonalBestForLocation(withLocation location: String) -> NSTimeInterval? {
+        if self.location.uppercaseString == location.uppercaseString {
+            if next != nil {
+                let bestInRestOfList = next!.displayPersonalBestForLocation(withLocation: location)
+                if bestInRestOfList == nil || duration < bestInRestOfList {
+                    return duration
+                } else {
+                    return bestInRestOfList
+                }
+            } else {
+                return duration
+            }
+        } else {
+            return (next == nil) ? nil : next!.displayPersonalBestForLocation(withLocation: location)
+        }
+    }
+    
+    
+    /**
      Returns the total amount of workouts in the list.
      */
     func countWorkouts() -> Int {

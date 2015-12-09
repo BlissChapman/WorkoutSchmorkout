@@ -102,7 +102,23 @@ while true {
         continue
         
     case .PersonalBestForLocation:
-        print("PERSONAL BEST - NOT YET IMPLEMENTED")
+        guard let headOfList = headOfList else {
+            print("You have not recorded any workouts yet. \n")
+            continue
+        }
+        
+        print("Enter the location you would like to search for:")
+        guard let locationSearch = Console.readln() else {
+            print("COULD NOT INTERPRET INPUT. Please select an option from the menu below:")
+            continue
+        }
+        
+        if let personalBest = headOfList.displayPersonalBestForLocation(withLocation: locationSearch) {
+            print("\(personalBest) seconds")
+        } else {
+            print("No personal best.")
+        }
+        
         continue
     case .Quit:
         

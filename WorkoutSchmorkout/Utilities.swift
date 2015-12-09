@@ -78,11 +78,11 @@ class Utilities {
      Adds 5 starting workouts and returns the head of this list. This is for debugging purposes only
      */
     static func add5TestWorkouts() -> Workout {
-        let workout1 = Workout(startTime: NSDate(), duration: 5.0, location: "TEST LOCATION", buddy: "Test Workout", rating: 1, id: 5, next: nil)
-        let workout2 = Workout(startTime: NSDate(), duration: 5.0, location: "TEST LOCATION", buddy: "Test Workout", rating: 6, id: 4, next: workout1)
-        let workout3 = Workout(startTime: NSDate(), duration: 5.0, location: "TEST LOCATION", buddy: "Test Workout", rating: 3, id: 3, next: workout2)
-        let workout4 = Workout(startTime: NSDate(), duration: 5.0, location: "TEST LOCATION", buddy: "Test Workout", rating: 4, id: 2, next: workout3)
-        let head = Workout(startTime: NSDate(), duration: 5.0, location: "TEST LOCATION", buddy: "HEAD", rating: 5, id: 9, next: workout4)
+        let workout1 = Workout(startTime: NSDate(), duration: 0.5, location: "TEST LOCATION", buddy: "Test Workout", rating: 1, id: 5, next: nil)
+        let workout2 = Workout(startTime: NSDate(), duration: 1.0, location: "TEST Yosemite", buddy: "Test Workout", rating: 6, id: 4, next: workout1)
+        let workout3 = Workout(startTime: NSDate(), duration: 25.0, location: "TEST Yosemite", buddy: "Test Workout", rating: 3, id: 3, next: workout2)
+        let workout4 = Workout(startTime: NSDate(), duration: 50.0, location: "TEST Mavericks", buddy: "Test Workout", rating: 4, id: 2, next: workout3)
+        let head = Workout(startTime: NSDate(), duration: 75.0, location: "TEST LOCATION", buddy: "HEAD", rating: 5, id: 9, next: workout4)
         
         return head
     }
